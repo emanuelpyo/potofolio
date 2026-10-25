@@ -1,0 +1,53 @@
+{{define "header"}}
+<div class="fixed top-4 md:top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none w-full">
+  <div class="w-full max-w-5xl pointer-events-auto">
+    <div class="reveal" data-reveal="down">
+      <div class="relative flex items-center justify-between py-3 md:py-4 px-6 md:px-8 bg-background/80 backdrop-blur-md border border-text-secondary/20 rounded-full shadow-lg transition-colors duration-300">
+        <div class="flex flex-row items-center">
+          <button data-scroll="home" class="cursor-pointer text-xl md:text-2xl font-black text-text-primary tracking-tighter">
+            PORTO<span class="text-text-secondary"></span>
+          </button>
+        </div>
+
+        <nav class="flex-row md:gap-8 lg:gap-10 hidden lg:flex items-center" aria-label="Navigasi utama">
+          <button data-scroll="home" data-section="home" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out">Home</button>
+          <button data-scroll="companies" data-section="companies" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out">Companies</button>
+          <button data-scroll="about" data-section="about" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out">About</button>
+          <button data-scroll="experience" data-section="experience" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out">Experience</button>
+          <button data-scroll="projects" data-section="projects" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out">Projects</button>
+          <button data-scroll="contacts" data-section="contacts" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out">Contacts</button>
+        </nav>
+
+        <div class="flex items-center gap-4">
+          <button id="theme-toggle" class="cursor-pointer text-text-secondary hover:text-text-primary transition-colors" aria-label="Aktifkan tema terang">
+            <svg class="w-5 h-5 md:w-6 md:h-6 theme-icon-dark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 21a9 9 0 0 1-.5-17.986V3c-.354.966-.5 1.911-.5 3a9 9 0 0 0 9 9c.239 0 .254.018.488 0A9.004 9.004 0 0 1 12 21Z" />
+            </svg>
+            <svg class="w-5 h-5 md:w-6 md:h-6 theme-icon-light hidden" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5V3m0 18v-2M7.05 7.05 5.636 5.636m12.728 12.728L16.95 16.95M5 12H3m18 0h-2M7.05 16.95l-1.414 1.414M18.364 5.636 16.95 7.05M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />
+            </svg>
+          </button>
+
+          <button id="menu-toggle" class="lg:hidden text-text-secondary" aria-label="Buka menu navigasi" aria-expanded="false">
+            <svg class="w-6 md:w-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path class="menu-icon-open" stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h14" />
+              <path class="menu-icon-close hidden" stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M6 6l12 12M18 6 6 18" />
+            </svg>
+          </button>
+        </div>
+
+        <div id="mobile-menu" class="scale-0 opacity-0 pointer-events-none lg:hidden transform absolute top-16 right-0 z-50 origin-top-right transition-all duration-300 ease-in-out">
+          <div class="flex flex-col gap-6 bg-background/95 backdrop-blur-md border border-text-secondary/10 p-6 rounded-2xl shadow-xl w-48">
+            <button data-scroll="home" data-section="home" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out">Home</button>
+            <button data-scroll="companies" data-section="companies" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out">Companies</button>
+            <button data-scroll="about" data-section="about" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out">About</button>
+            <button data-scroll="experience" data-section="experience" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out">Experience</button>
+            <button data-scroll="projects" data-section="projects" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out">Projects</button>
+            <button data-scroll="contacts" data-section="contacts" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out">Contacts</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{end}}

@@ -1,0 +1,72 @@
+{{define "hero"}}
+<section id="home" class="w-full max-w-7xl mx-auto cursor-default grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center px-6 md:px-12 pt-32 md:pt-40 pb-24 md:pb-32 overflow-hidden">
+  <div class="reveal" data-reveal="left">
+    <div class="flex flex-col gap-2">
+      <div>
+        <h1 class="text-text-primary text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter leading-tight">
+          Hi, I&apos;m
+          <span class="text-transparent bg-clip-text bg-linear-to-r from-text-primary to-text-secondary"> {{.Profile.ShortName}}</span>
+        </h1>
+      </div>
+
+      <div class="relative">
+        <span id="hero-role" class="text-text-primary text-xl md:text-2xl lg:text-3xl font-bold tracking-tight"></span>
+        <span class="animate-cursor text-text-secondary text-2xl lg:text-3xl font-light">|</span>
+      </div>
+
+      <div class="max-w-xl mt-4">
+        <p class="text-text-secondary text-base md:text-lg leading-relaxed font-medium">{{.Profile.Tagline}}</p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4 mt-8">
+        <button data-scroll="projects" class="cursor-pointer text-sm md:text-base font-bold bg-text-primary text-background px-8 py-4 rounded-xl flex flex-row items-center justify-center gap-3 hover:-translate-y-1.5 hover:scale-[1.02] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:hover:shadow-[0_8px_30px_rgba(255,255,255,0.1)] transition-all duration-300 ease-out">
+          Lihat Karya
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
+          </svg>
+        </button>
+
+        <a id="hero-cv-link" href="{{.CVPath}}" download class="hidden cursor-pointer text-sm md:text-base font-bold border-2 border-text-secondary/20 hover:border-text-primary text-text-primary px-8 py-4 rounded-xl flex flex-row items-center justify-center gap-3 hover:-translate-y-1.5 hover:scale-[1.02] hover:bg-thirdary/40 transition-all duration-300 ease-out bg-background/50 backdrop-blur-sm">
+          Download CV
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2m-8 1V4m0 12-4-4m4 4 4-4" />
+          </svg>
+        </a>
+        <span id="hero-cv-disabled" aria-disabled="true" title="CV belum tersedia" class="text-sm md:text-base font-bold border-2 border-dashed border-text-secondary/20 text-text-secondary/60 px-8 py-4 rounded-xl flex flex-row items-center justify-center gap-3 cursor-not-allowed select-none">
+          Download CV
+        </span>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-text-secondary/10">
+        <span class="text-xs uppercase tracking-widest font-bold text-text-secondary mb-4 block">Connect</span>
+        <div class="flex flex-row gap-4">
+          {{range .Socials}}
+          <a href="{{.Href}}" target="_blank" rel="noopener noreferrer" aria-label="{{.Label}}" class="p-3 border border-text-secondary/20 rounded-xl hover:border-text-primary hover:bg-text-primary hover:text-background text-text-primary transition-all duration-300">
+            {{.Icon}}
+          </a>
+          {{end}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal" data-reveal="right">
+    <div class="flex flex-col items-center justify-center relative mt-12 md:mt-0">
+      <div class="absolute inset-0 bg-linear-to-tr from-thirdary to-background rounded-full scale-110 opacity-50 blur-2xl"></div>
+
+      <div class="relative z-10 p-2 bg-background border border-text-secondary/10 rounded-full shadow-2xl">
+        <img src="/images/profile.jpeg" alt="{{.Profile.Name}}" width="400" height="400" class="rounded-full object-cover aspect-square floating transition-all duration-700" />
+      </div>
+
+      <div class="absolute -bottom-10 md:-bottom-12 -left-4 md:-left-12 z-20 flex flex-col gap-3">
+        {{range $i, $stat := .QuickStats}}
+        <div class="floating flex items-center gap-3 bg-background/90 backdrop-blur-md border border-text-secondary/10 p-3 pr-5 rounded-2xl shadow-xl hover:-translate-y-1 transition-transform duration-300" style="animation-delay: {{mul $i 150}}ms">
+          <div class="bg-text-primary text-background p-2 rounded-xl">{{$stat.Icon}}</div>
+          <span class="text-xs md:text-sm font-semibold text-text-primary whitespace-nowrap">{{$stat.Message}}</span>
+        </div>
+        {{end}}
+      </div>
+    </div>
+  </div>
+</section>
+{{end}}

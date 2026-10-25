@@ -1,0 +1,53 @@
+{{define "index"}}
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{.Meta.Title}}</title>
+<meta name="description" content="{{.Meta.Description}}">
+<meta name="keywords" content="{{.Meta.Keywords}}">
+<meta name="author" content="Stiven Deryl Imanuel Pyo">
+<meta name="creator" content="Stiven Deryl Imanuel Pyo">
+<link rel="canonical" href="{{.Meta.BaseURL}}/">
+<link rel="icon" href="/images/profile.jpeg">
+<link rel="apple-touch-icon" href="/images/profile.jpeg">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="id_ID">
+<meta property="og:url" content="{{.Meta.BaseURL}}/">
+<meta property="og:title" content="{{.Meta.Title}}">
+<meta property="og:description" content="{{.Meta.OGDescription}}">
+<meta property="og:site_name" content="Deryl Portfolio">
+<meta property="og:image" content="{{.Meta.BaseURL}}/images/profile.jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Stiven Deryl Imanuel Pyo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{.Meta.Title}}">
+<meta name="twitter:description" content="{{.Meta.OGDescription}}">
+<meta name="twitter:image" content="{{.Meta.BaseURL}}/images/profile.jpeg">
+<link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/poppins-900.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/app.css">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body class="antialiased">
+{{template "loader" .}}
+<header class="cursor-default sticky top-0 z-50">
+{{template "header" .}}
+</header>
+{{template "hero" .}}
+{{template "companies" .}}
+{{template "about" .}}
+{{template "graduation" .}}
+{{template "experience" .}}
+{{template "techstack" .}}
+{{template "projects" .}}
+{{template "certificates" .}}
+{{template "contact" .}}
+{{template "footer" .}}
+<script id="site-config" type="application/json">{{.JSConfig}}</script>
+<script src="/js/app.js" defer></script>
+</body>
+</html>
+{{end}}

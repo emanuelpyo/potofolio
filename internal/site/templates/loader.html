@@ -1,0 +1,14 @@
+{{define "loader"}}
+<div id="page-loader" class="splash-failsafe fixed inset-0 z-[100] bg-background flex flex-col items-center justify-center overflow-hidden" aria-hidden="true">
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-text-primary/10 rounded-full blur-[100px]"></div>
+  <div class="relative overflow-hidden h-16 flex items-center justify-center">
+    <div class="loader-title text-4xl md:text-5xl font-black text-text-primary tracking-tighter">Deryl<span class="text-thirdary">.</span></div>
+  </div>
+  <div class="relative overflow-hidden h-8 mt-2 flex items-center justify-center">
+    <div class="loader-sub text-sm font-bold tracking-[0.3em] uppercase text-text-secondary">Portfolio Loading</div>
+  </div>
+  <div class="mt-8 w-48 md:w-64 h-[2px] bg-text-secondary/20 rounded-full overflow-hidden relative">
+    <div class="loader-bar absolute inset-y-0 left-0 w-full bg-text-primary rounded-full"></div>
+  </div>
+</div>
+{{end}}

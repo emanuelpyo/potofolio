@@ -1,5 +1,39 @@
 @import "tailwindcss";
 
+/* Content sources for the Go templates and client script. */
+@source "../internal/site";
+@source "../public/js";
+
+/* Self-hosted Poppins (was next/font/google). Latin subset, weights used. */
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/poppins-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/poppins-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/poppins-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/fonts/poppins-900.woff2") format("woff2");
+}
+
 /* ============================================================
    Deryl Portfolio, design tokens
    Adapted from the reference repository (RyHarJr/portofoliov2):
@@ -9,6 +43,7 @@
 
 /* Light theme */
 :root {
+  --font-poppins: "Poppins";
   --background: #fdfdfd;
   --foreground: #ffffff;
   --thirdary: #f3f4f6;
@@ -205,6 +240,48 @@ html {
 :focus-visible {
   outline: 2px solid var(--text-primary);
   outline-offset: 2px;
+}
+
+/* Scroll reveals, replacing the motion Fade/FadeUp/FadeDown/FadeLeft/FadeRight
+   wrappers. Gated behind html.js so the content stays visible if client JS
+   never runs. Delays are set per element via inline transition-delay. */
+.js .reveal {
+  opacity: 0;
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform, filter;
+}
+
+.js .reveal[data-reveal="up"] {
+  transform: translateY(40px) scale(0.95);
+  filter: blur(10px);
+}
+
+.js .reveal[data-reveal="down"] {
+  transform: translateY(-40px) scale(0.95);
+  filter: blur(10px);
+}
+
+.js .reveal[data-reveal="left"] {
+  transform: translateX(-40px) scale(0.95);
+  filter: blur(10px);
+}
+
+.js .reveal[data-reveal="right"] {
+  transform: translateX(40px) scale(0.95);
+  filter: blur(10px);
+}
+
+.js .reveal[data-reveal="fade"] {
+  transition-duration: 1s;
+}
+
+.js .reveal.reveal-in {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
 }
 
 /* Respect reduced motion across the whole app */

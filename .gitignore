@@ -37,6 +37,7 @@ coverage/
 out/
 dist/
 build/
+/bin/
 .nuxt/
 .output/
 .vuepress/dist/
@@ -100,3 +101,6 @@ next-env.d.ts
 # Gatsby
 # Uncomment if this project uses Gatsby:
 # /public
+
+# Local Playwright MCP artifacts
+.playwright-mcp/
