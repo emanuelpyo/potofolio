@@ -29,7 +29,17 @@
 <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/poppins-900.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/app.css">
-<script>document.documentElement.classList.add("js")</script>
+<script>
+  (function(){
+    document.documentElement.classList.add("js");
+    try {
+      var savedLang = localStorage.getItem("portfolio-language");
+      if (savedLang === "en") {
+        document.documentElement.setAttribute("lang", "en");
+      }
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body class="antialiased">
 {{template "loader" .}}

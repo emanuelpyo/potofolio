@@ -9,17 +9,63 @@
           </button>
         </div>
 
-        <nav class="flex-row md:gap-8 lg:gap-10 hidden lg:flex items-center" aria-label="Navigasi utama">
-          <button data-scroll="home" data-section="home" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out">Home</button>
-          <button data-scroll="companies" data-section="companies" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out">Companies</button>
-          <button data-scroll="about" data-section="about" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out">About</button>
-          <button data-scroll="experience" data-section="experience" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out">Experience</button>
-          <button data-scroll="projects" data-section="projects" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out">Projects</button>
-          <button data-scroll="contacts" data-section="contacts" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out">Contacts</button>
+        <nav class="flex-row md:gap-8 lg:gap-10 hidden lg:flex items-center" aria-label="Navigasi utama" data-i18n-aria="nav_main">
+          <button data-scroll="home" data-section="home" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out" data-i18n="nav_home">Beranda</button>
+          <button data-scroll="companies" data-section="companies" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out" data-i18n="nav_companies">Kolaborasi</button>
+          <button data-scroll="about" data-section="about" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out" data-i18n="nav_about">Tentang</button>
+          <button data-scroll="experience" data-section="experience" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out" data-i18n="nav_experience">Pengalaman</button>
+          <button data-scroll="projects" data-section="projects" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out" data-i18n="nav_projects">Karya</button>
+          <button data-scroll="contacts" data-section="contacts" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base tracking-wide flex flex-row items-center transition-colors duration-200 ease-in-out" data-i18n="nav_contacts">Kontak</button>
         </nav>
 
-        <div class="flex items-center gap-4">
-          <button id="theme-toggle" class="cursor-pointer text-text-secondary hover:text-text-primary transition-colors" aria-label="Aktifkan tema terang">
+        <div class="flex items-center gap-3 md:gap-4">
+          <!-- Language switcher control -->
+          <div class="relative" id="lang-switcher">
+            <button
+              id="lang-toggle"
+              type="button"
+              class="cursor-pointer text-text-secondary hover:text-text-primary transition-colors flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-text-secondary/20 hover:border-text-primary/50 text-xs font-bold tracking-wider"
+              aria-label="Ganti bahasa"
+              aria-expanded="false"
+              aria-haspopup="true"
+              data-i18n-aria="lang_switch"
+            >
+              <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              </svg>
+              <span id="lang-label" class="uppercase">ID</span>
+            </button>
+
+            <!-- Language dropdown menu -->
+            <div
+              id="lang-menu"
+              class="scale-0 opacity-0 pointer-events-none transform absolute top-11 right-0 z-50 origin-top-right transition-all duration-200 ease-out bg-background/95 backdrop-blur-md border border-text-secondary/20 p-1.5 rounded-2xl shadow-xl w-40 flex flex-col gap-1"
+              role="menu"
+              aria-label="Pilihan bahasa"
+            >
+              <button
+                type="button"
+                data-lang-choice="id"
+                role="menuitem"
+                class="lang-option w-full text-left px-3 py-2 rounded-xl text-xs font-bold transition-colors flex items-center justify-between text-text-primary hover:bg-thirdary/60"
+              >
+                <span>Bahasa Indonesia</span>
+                <span class="lang-check text-[10px] uppercase tracking-wider text-text-primary font-black">ID</span>
+              </button>
+              <button
+                type="button"
+                data-lang-choice="en"
+                role="menuitem"
+                class="lang-option w-full text-left px-3 py-2 rounded-xl text-xs font-bold transition-colors flex items-center justify-between text-text-secondary hover:text-text-primary hover:bg-thirdary/60"
+              >
+                <span>English</span>
+                <span class="lang-check text-[10px] uppercase tracking-wider text-text-secondary/50 font-black">EN</span>
+              </button>
+            </div>
+          </div>
+
+          <button id="theme-toggle" class="cursor-pointer text-text-secondary hover:text-text-primary transition-colors" aria-label="Aktifkan tema terang" data-i18n-aria="theme_to_light">
             <svg class="w-5 h-5 md:w-6 md:h-6 theme-icon-dark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
               <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 21a9 9 0 0 1-.5-17.986V3c-.354.966-.5 1.911-.5 3a9 9 0 0 0 9 9c.239 0 .254.018.488 0A9.004 9.004 0 0 1 12 21Z" />
             </svg>
@@ -28,7 +74,7 @@
             </svg>
           </button>
 
-          <button id="menu-toggle" class="lg:hidden text-text-secondary" aria-label="Buka menu navigasi" aria-expanded="false">
+          <button id="menu-toggle" class="lg:hidden text-text-secondary" aria-label="Buka menu navigasi" aria-expanded="false" data-i18n-aria="menu_open">
             <svg class="w-6 md:w-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
               <path class="menu-icon-open" stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h14" />
               <path class="menu-icon-close hidden" stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M6 6l12 12M18 6 6 18" />
@@ -38,12 +84,12 @@
 
         <div id="mobile-menu" class="scale-0 opacity-0 pointer-events-none lg:hidden transform absolute top-16 right-0 z-50 origin-top-right transition-all duration-300 ease-in-out">
           <div class="flex flex-col gap-6 bg-background/95 backdrop-blur-md border border-text-secondary/10 p-6 rounded-2xl shadow-xl w-48">
-            <button data-scroll="home" data-section="home" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out">Home</button>
-            <button data-scroll="companies" data-section="companies" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out">Companies</button>
-            <button data-scroll="about" data-section="about" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out">About</button>
-            <button data-scroll="experience" data-section="experience" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out">Experience</button>
-            <button data-scroll="projects" data-section="projects" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out">Projects</button>
-            <button data-scroll="contacts" data-section="contacts" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out">Contacts</button>
+            <button data-scroll="home" data-section="home" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out" data-i18n="nav_home">Beranda</button>
+            <button data-scroll="companies" data-section="companies" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out" data-i18n="nav_companies">Kolaborasi</button>
+            <button data-scroll="about" data-section="about" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out" data-i18n="nav_about">Tentang</button>
+            <button data-scroll="experience" data-section="experience" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out" data-i18n="nav_experience">Pengalaman</button>
+            <button data-scroll="projects" data-section="projects" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out" data-i18n="nav_projects">Karya</button>
+            <button data-scroll="contacts" data-section="contacts" class="nav-link text-text-secondary font-medium hover:text-text-primary cursor-pointer text-sm md:text-base flex flex-row items-center hover:text-text-primary transition-colors duration-200 ease-in-out" data-i18n="nav_contacts">Kontak</button>
           </div>
         </div>
       </div>

@@ -11,6 +11,9 @@
     }
   }
 
+  var LANG_KEY = config.langKey || "portfolio-language";
+  var currentLang = "id";
+
   /* ----------------------------------------------------------------
      Theme toggle (dark is the default; choice persists in localStorage)
      ---------------------------------------------------------------- */
@@ -26,7 +29,7 @@
       document.documentElement.classList.toggle("dark", isDark);
       if (darkIcon) darkIcon.classList.toggle("hidden", !isDark);
       if (lightIcon) lightIcon.classList.toggle("hidden", isDark);
-      toggle.setAttribute("aria-label", isDark ? "Aktifkan tema terang" : "Aktifkan tema gelap");
+      updateThemeAria();
     }
 
     toggle.addEventListener("click", function () {
@@ -36,6 +39,190 @@
     });
 
     apply();
+  })();
+
+  function updateThemeAria() {
+    var toggle = document.getElementById("theme-toggle");
+    if (!toggle) return;
+    var isDark = document.documentElement.classList.contains("dark");
+    var dict = (config.dict && config.dict[currentLang]) || {};
+    var label = isDark
+      ? (dict.theme_to_light || "Aktifkan tema terang")
+      : (dict.theme_to_dark || "Aktifkan tema gelap");
+    toggle.setAttribute("aria-label", label);
+  }
+
+  /* ----------------------------------------------------------------
+     Bilingual i18n system (Indonesian default, English alternative)
+     ---------------------------------------------------------------- */
+  var i18nListeners = [];
+
+  function t(key, fallback) {
+    var dict = (config.dict && config.dict[currentLang]) || {};
+    return dict[key] || fallback || "";
+  }
+
+  function applyLanguage(lang) {
+    if (lang !== "id" && lang !== "en") lang = "id";
+    currentLang = lang;
+    document.documentElement.setAttribute("lang", lang);
+
+    var dict = (config.dict && config.dict[lang]) || {};
+
+    // 1. Static text elements: data-i18n="key"
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n");
+      if (dict[key] !== undefined) {
+        el.textContent = dict[key];
+      }
+    });
+
+    // 2. Elements with inline data-i18n-id and data-i18n-en
+    document.querySelectorAll("[data-i18n-id]").forEach(function (el) {
+      var val = lang === "en" ? el.getAttribute("data-i18n-en") : el.getAttribute("data-i18n-id");
+      if (val !== null && val !== undefined) {
+        el.textContent = val;
+      }
+    });
+
+    // 3. Attribute translations: aria-label
+    document.querySelectorAll("[data-i18n-aria]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n-aria");
+      if (dict[key] !== undefined) {
+        el.setAttribute("aria-label", dict[key]);
+      }
+    });
+
+    // 4. Attribute translations: title
+    document.querySelectorAll("[data-i18n-title]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n-title");
+      if (dict[key] !== undefined) {
+        el.setAttribute("title", dict[key]);
+      }
+    });
+
+    // 5. Attribute translations: placeholder
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n-placeholder");
+      if (dict[key] !== undefined) {
+        el.setAttribute("placeholder", dict[key]);
+      }
+    });
+
+    // 6. Image alt attributes
+    document.querySelectorAll("[data-i18n-alt-id]").forEach(function (el) {
+      var val = lang === "en" ? el.getAttribute("data-i18n-alt-en") : el.getAttribute("data-i18n-alt-id");
+      if (val) el.setAttribute("alt", val);
+    });
+
+    // 7. Lightbox trigger aria-label
+    document.querySelectorAll("[data-i18n-aria-alt-id]").forEach(function (el) {
+      var alt = lang === "en" ? el.getAttribute("data-i18n-aria-alt-en") : el.getAttribute("data-i18n-aria-alt-id");
+      var prefix = lang === "en" ? "Enlarge " : "Perbesar ";
+      if (alt) el.setAttribute("aria-label", prefix + alt);
+    });
+
+    // 8. Marquee spans: data-marquee-id and data-marquee-en
+    document.querySelectorAll("[data-marquee-id]").forEach(function (el) {
+      var val = lang === "en" ? el.getAttribute("data-marquee-en") : el.getAttribute("data-marquee-id");
+      if (val) el.innerHTML = val;
+    });
+
+    // 9. Update language switcher UI
+    var label = document.getElementById("lang-label");
+    if (label) label.textContent = lang.toUpperCase();
+
+    document.querySelectorAll("[data-lang-choice]").forEach(function (btn) {
+      var choice = btn.getAttribute("data-lang-choice");
+      var active = choice === lang;
+      btn.classList.toggle("text-text-primary", active);
+      btn.classList.toggle("text-text-secondary", !active);
+      var check = btn.querySelector(".lang-check");
+      if (check) {
+        check.classList.toggle("text-text-primary", active);
+        check.classList.toggle("text-text-secondary/50", !active);
+      }
+    });
+
+    // 10. Update theme aria-label for active language
+    updateThemeAria();
+
+    // 11. Notify subscribers (hero typing, chat)
+    i18nListeners.forEach(function (fn) {
+      try {
+        fn(lang);
+      } catch (e) {}
+    });
+  }
+
+  (function langSwitcher() {
+    var switcher = document.getElementById("lang-switcher");
+    var toggle = document.getElementById("lang-toggle");
+    var menu = document.getElementById("lang-menu");
+    if (!switcher || !toggle || !menu) return;
+
+    function isOpen() {
+      return !menu.classList.contains("opacity-0");
+    }
+
+    function setMenu(open) {
+      if (open) {
+        menu.classList.remove("scale-0", "opacity-0", "pointer-events-none");
+        menu.classList.add("scale-100", "opacity-100");
+      } else {
+        menu.classList.remove("scale-100", "opacity-100");
+        menu.classList.add("scale-0", "opacity-0", "pointer-events-none");
+      }
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+
+    toggle.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      setMenu(!isOpen());
+    });
+
+    document.querySelectorAll("[data-lang-choice]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var choice = btn.getAttribute("data-lang-choice");
+        setLanguage(choice);
+        setMenu(false);
+      });
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!switcher.contains(e.target)) {
+        setMenu(false);
+      }
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && isOpen()) {
+        setMenu(false);
+        toggle.focus();
+      }
+    });
+  })();
+
+  function setLanguage(lang) {
+    if (lang !== "id" && lang !== "en") lang = "id";
+    try {
+      localStorage.setItem(LANG_KEY, lang);
+    } catch (e) {}
+    applyLanguage(lang);
+  }
+  window.setPortfolioLanguage = setLanguage;
+
+  // Initial language resolution: stored choice -> fallback "id"
+  (function initLanguage() {
+    var stored = null;
+    try {
+      stored = localStorage.getItem(LANG_KEY);
+    } catch (e) {}
+    if (stored !== "id" && stored !== "en") stored = "id";
+    applyLanguage(stored);
   })();
 
   /* ----------------------------------------------------------------
@@ -62,7 +249,9 @@
       if (openIcon) openIcon.classList.toggle("hidden", open);
       if (closeIcon) closeIcon.classList.toggle("hidden", !open);
       menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
-      menuToggle.setAttribute("aria-label", open ? "Tutup menu navigasi" : "Buka menu navigasi");
+      var dict = (config.dict && config.dict[currentLang]) || {};
+      var label = open ? (dict.menu_close || "Tutup menu navigasi") : (dict.menu_open || "Buka menu navigasi");
+      menuToggle.setAttribute("aria-label", label);
     }
 
     if (menuToggle) {
@@ -209,14 +398,21 @@
      ---------------------------------------------------------------- */
   (function hero() {
     var roleEl = document.getElementById("hero-role");
-    var roles = (config.roles || []).slice();
+    function getRoles() {
+      if (config.roles && config.roles[currentLang]) {
+        return config.roles[currentLang].slice();
+      }
+      return ["Pengembang Web", "Dukungan IT", "Frontend Developer"];
+    }
 
-    if (roleEl && roles.length) {
-      var index = 0;
-      var subIndex = 0;
-      var deleting = false;
+    var roles = getRoles();
+    var index = 0;
+    var subIndex = 0;
+    var deleting = false;
 
+    if (roleEl) {
       var tick = function () {
+        if (!roles.length) return;
         var text = roles[index % roles.length];
         if (!deleting && subIndex < text.length) {
           subIndex++;
@@ -228,11 +424,19 @@
           deleting = false;
           index = (index + 1) % roles.length;
         }
-        roleEl.textContent = roles[index].substring(0, subIndex);
+        roleEl.textContent = roles[index % roles.length].substring(0, subIndex);
         window.setTimeout(tick, deleting ? 75 : 150);
       };
 
       window.setTimeout(tick, 150);
+
+      // Reset typing seamlessly on language change
+      i18nListeners.push(function () {
+        roles = getRoles();
+        index = 0;
+        subIndex = 0;
+        deleting = false;
+      });
     }
 
     var link = document.getElementById("hero-cv-link");
@@ -253,14 +457,6 @@
      Graduation gallery: expand + lightbox
      ---------------------------------------------------------------- */
   (function graduation() {
-    var photos = Array.prototype.map.call(
-      document.querySelectorAll("[data-graduation-item]"),
-      function (item) {
-        var img = item.querySelector("img");
-        return { src: img.getAttribute("src"), alt: img.getAttribute("alt") };
-      },
-    );
-
     var toggle = document.getElementById("graduation-toggle");
     var toggleLabel = document.getElementById("graduation-toggle-label");
     var toggleIcon = document.getElementById("graduation-toggle-icon");
@@ -269,12 +465,31 @@
     var lightboxImg = document.getElementById("lightbox-img");
     var current = null;
 
+    function getPhotos() {
+      return Array.prototype.map.call(
+        document.querySelectorAll("[data-graduation-item]"),
+        function (item) {
+          var img = item.querySelector("img");
+          return {
+            src: img.getAttribute("src"),
+            alt: img.getAttribute("alt"),
+          };
+        },
+      );
+    }
+
+    function updateToggleLabel() {
+      if (!toggle || !toggleLabel) return;
+      var expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggleLabel.textContent = expanded ? t("grad_show_less", "Tampilkan Lebih Sedikit") : t("grad_view_all", "Lihat Semua Foto");
+    }
+
     if (toggle) {
       toggle.addEventListener("click", function () {
         var expanded = toggle.getAttribute("aria-expanded") === "true";
         expanded = !expanded;
         toggle.setAttribute("aria-expanded", expanded ? "true" : "false");
-        if (toggleLabel) toggleLabel.textContent = expanded ? "Tampilkan Lebih Sedikit" : "Lihat Semua Foto";
+        updateToggleLabel();
         if (toggleIcon) toggleIcon.classList.toggle("rotate-180", expanded);
         items.forEach(function (item, i) {
           if (i >= 3) item.classList.toggle("hidden", !expanded);
@@ -282,7 +497,10 @@
       });
     }
 
+    i18nListeners.push(updateToggleLabel);
+
     function showLightbox(i) {
+      var photos = getPhotos();
       if (!lightbox || !lightboxImg || !photos[i]) return;
       current = i;
       lightboxImg.setAttribute("src", photos[i].src);
@@ -301,6 +519,7 @@
     }
 
     function step(delta) {
+      var photos = getPhotos();
       if (current === null || !photos.length) return;
       showLightbox((current + delta + photos.length) % photos.length);
     }
@@ -426,6 +645,10 @@
       }
 
       window.addEventListener("resize", updateWidth);
+      i18nListeners.push(function () {
+        // give browser a moment to layout new translated string width
+        requestAnimationFrame(updateWidth);
+      });
       updateWidth();
       requestAnimationFrame(frame);
     });
@@ -575,7 +798,7 @@
   })();
 
   /* ----------------------------------------------------------------
-     Chat assistant
+     Chat assistant (bilingual greeting, prompt instructions, errors)
      ---------------------------------------------------------------- */
   (function chat() {
     var overlay = document.getElementById("chat-overlay");
@@ -593,11 +816,15 @@
     var loading = false;
     var configured = null;
 
+    function welcomeText() {
+      return t("chat_welcome_text", "Halo! Gue asisten AI Deryl. Ada yang bisa gue bantu soal portofolio, pengalaman, atau project Deryl?");
+    }
+
     function welcome() {
       return {
         id: "welcome-msg",
         sender: "bot",
-        text: config.welcome || "Halo! Gue asisten AI.",
+        text: welcomeText(),
         timestamp: new Date(0),
       };
     }
@@ -622,7 +849,19 @@
     }
 
     var messages = read();
-    if (!messages.length) messages = [welcome()];
+    if (!messages.length) {
+      messages = [welcome()];
+    } else if (messages.length === 1 && messages[0].id === "welcome-msg") {
+      messages[0].text = welcomeText();
+    }
+
+    // When language changes and only welcome message is present, update it seamlessly
+    i18nListeners.push(function () {
+      if (messages.length === 1 && messages[0].id === "welcome-msg") {
+        messages[0].text = welcomeText();
+        render();
+      }
+    });
 
     function escapeHtml(s) {
       return String(s).replace(/[&<>"']/g, function (c) {
@@ -701,7 +940,7 @@
       time.className =
         "text-[10px] uppercase font-bold tracking-wider mt-2 block " +
         (msg.sender === "user" ? "text-background/70" : "text-text-secondary/70");
-      time.textContent = new Date(msg.timestamp).toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
+      time.textContent = new Date(msg.timestamp).toLocaleTimeString(currentLang === "en" ? "en-US" : "id-ID", { hour: "2-digit", minute: "2-digit" });
 
       bubble.appendChild(body);
       bubble.appendChild(time);
@@ -780,25 +1019,10 @@
     }
 
     function systemPrompt() {
-      return [
-        "System Context: Kamu adalah Deryl Assistant, asisten AI pribadi untuk " + config.name + " (" + config.shortName + "). Jawab pertanyaan pengunjung website portofolio dengan ramah, profesional, dan ringkas dalam bahasa Indonesia.",
-        "",
-        "Informasi tentang " + config.shortName + ":",
-        "1. Profil:",
-        "   - Nama: " + config.name,
-        "   - Peran: Web Developer dan IT Support, lulusan Informatika",
-        "   - Lokasi: " + config.location,
-        "   - Email: " + config.email,
-        "   - LinkedIn: " + config.linkedin,
-        "   - GitHub: " + config.github,
-        "   - Pendidikan: " + config.education,
-        "2. Pengalaman:",
-        "   - Web Developer di Lawkey (bergabung dalam tim)",
-        "   - Web Developer Intern di PT Primadaya Plastisindo Tbk (sedang menjalani magang)",
-        "3. Keahlian: HTML, CSS, JavaScript, TypeScript, React, Tailwind, PHP, Laravel, Node.js, MySQL, Python, TensorFlow.",
-        "",
-        "Aturan: Jawab langsung ke intinya, jangan menambahkan informasi yang tidak ada di profil ini, dan selalu bersikap ramah.",
-      ].join("\n");
+      if (config.systemPrompts && config.systemPrompts[currentLang]) {
+        return config.systemPrompts[currentLang];
+      }
+      return config.systemPrompts ? config.systemPrompts.id : "";
     }
 
     function setLoading(value) {
@@ -879,13 +1103,13 @@
               configured = false;
               renderWarning();
             }
+            var errText = message.toLowerCase().indexOf("konfigurasi") !== -1
+              ? t("chat_unconfigured_err", "Asisten AI belum dikonfigurasi pada server ini, jadi gue belum bisa menjawab otomatis.")
+              : t("chat_conn_err_prefix", "Maaf, terjadi kesalahan koneksi atau server AI.") + " (" + message + ")";
             messages.push({
               id: (Date.now() + 1).toString(),
               sender: "bot",
-              text:
-                message.toLowerCase().indexOf("konfigurasi") !== -1
-                  ? "Asisten AI belum dikonfigurasi pada server ini, jadi gue belum bisa menjawab otomatis. Silakan hubungi Deryl lewat email atau LinkedIn di bagian kontak."
-                  : "Maaf, terjadi kesalahan koneksi atau server AI. (" + message + ")",
+              text: errText,
               timestamp: new Date(),
             });
             write(messages);

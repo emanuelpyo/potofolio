@@ -8,17 +8,17 @@
   </div>
 
   <div class="p-6 md:p-8 flex flex-col flex-grow">
-    <span class="text-xs font-bold tracking-widest text-text-secondary uppercase mb-2">{{.Role}}</span>
+    <span class="text-xs font-bold tracking-widest text-text-secondary uppercase mb-2" data-i18n-id="{{.Role.ID}}" data-i18n-en="{{.Role.EN}}">{{.Role.ID}}</span>
     <h4 class="text-2xl font-black text-text-primary tracking-tight leading-tight mb-3">{{.Name}}</h4>
-    <p class="text-sm text-text-secondary font-medium leading-relaxed flex-grow">{{.Description}}</p>
+    <p class="text-sm text-text-secondary font-medium leading-relaxed flex-grow" data-i18n-id="{{.Description.ID}}" data-i18n-en="{{.Description.EN}}">{{.Description.ID}}</p>
 
     {{if .URL}}
     <span class="mt-6 inline-flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-text-primary group/link">
-      Kunjungi Website
+      <span data-i18n="collab_visit">Kunjungi Website</span>
       <span class="w-8 h-[2px] bg-text-primary group-hover:w-12 transition-all duration-300"></span>
     </span>
     {{else}}
-    <span class="mt-6 text-xs font-bold tracking-[0.2em] uppercase text-text-secondary/60">Magang Aktif</span>
+    <span class="mt-6 text-xs font-bold tracking-[0.2em] uppercase text-text-secondary/60" data-i18n="collab_active_intern">Magang Aktif</span>
     {{end}}
   </div>
 </div>
@@ -28,7 +28,7 @@
 <section id="companies" class="w-full max-w-7xl mx-auto py-24 md:py-32 cursor-default bg-background relative border-t border-text-secondary/10">
   <div class="reveal" data-reveal="down">
     <div class="max-w-7xl mx-auto px-6 md:px-12 mb-16 md:mb-24 w-full text-left">
-      <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter">KOLABORASI</h3>
+      <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter" data-i18n="collab_title">KOLABORASI</h3>
     </div>
   </div>
 
@@ -52,7 +52,7 @@
 <section id="about" class="w-full max-w-7xl mx-auto py-24 md:py-32 cursor-default bg-background overflow-hidden border-t border-text-secondary/10">
   <div class="reveal" data-reveal="down">
     <div class="max-w-7xl mx-auto px-6 md:px-12 mb-16 md:mb-24 w-full text-left">
-      <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter">About Me</h3>
+      <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter" data-i18n="about_title">Tentang Saya</h3>
     </div>
   </div>
 
@@ -73,33 +73,33 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
         <div class="flex flex-col">
           <div class="reveal" data-reveal="fade">
-            <h4 class="text-lg md:text-xl font-bold text-text-primary mb-4 border-b border-text-secondary/20 pb-4">Who Am I</h4>
-            <p class="text-base text-text-secondary leading-relaxed font-medium">{{.Profile.About}}</p>
+            <h4 class="text-lg md:text-xl font-bold text-text-primary mb-4 border-b border-text-secondary/20 pb-4" data-i18n="about_who">Siapa Saya</h4>
+            <p class="text-base text-text-secondary leading-relaxed font-medium" data-i18n-id="{{.Profile.About.ID}}" data-i18n-en="{{.Profile.About.EN}}">{{.Profile.About.ID}}</p>
           </div>
         </div>
 
         <div class="flex flex-col">
           <div class="reveal" data-reveal="fade">
-            <h4 class="text-lg md:text-xl font-bold text-text-primary mb-4 border-b border-text-secondary/20 pb-4">My Approach</h4>
-            <p class="text-base text-text-secondary leading-relaxed font-medium">{{.Profile.Approach}}</p>
+            <h4 class="text-lg md:text-xl font-bold text-text-primary mb-4 border-b border-text-secondary/20 pb-4" data-i18n="about_approach">Pendekatan Saya</h4>
+            <p class="text-base text-text-secondary leading-relaxed font-medium" data-i18n-id="{{.Profile.Approach.ID}}" data-i18n-en="{{.Profile.Approach.EN}}">{{.Profile.Approach.ID}}</p>
           </div>
         </div>
       </div>
 
       <div class="mt-16 md:mt-20">
         <div class="reveal" data-reveal="fade">
-          <h4 class="text-lg md:text-xl font-bold text-text-primary mb-8 border-b border-text-secondary/20 pb-4 border-l-4 border-l-text-primary pl-4">Personal Details</h4>
+          <h4 class="text-lg md:text-xl font-bold text-text-primary mb-8 border-b border-text-secondary/20 pb-4 border-l-4 border-l-text-primary pl-4" data-i18n="about_details">Informasi Pribadi</h4>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-10">
           {{range $i, $d := .Profile.PersonalDetails}}
           <div class="reveal" data-reveal="left" style="transition-delay: {{mul (add $i 1) 100}}ms">
             <div class="flex flex-col p-2 -m-2 rounded-xl transition-colors duration-300 hover:bg-thirdary/40">
-              <span class="text-xs uppercase tracking-widest font-bold text-text-secondary mb-1">{{$d.Label}}</span>
+              <span class="text-xs uppercase tracking-widest font-bold text-text-secondary mb-1" data-i18n-id="{{$d.Label.ID}}" data-i18n-en="{{$d.Label.EN}}">{{$d.Label.ID}}</span>
               {{if $d.Href}}
-              <a href="{{$d.Href}}" class="text-base font-semibold text-text-primary hover:text-text-secondary transition-colors underline decoration-text-secondary/30 underline-offset-4">{{$d.Value}}</a>
+              <a href="{{$d.Href}}" class="text-base font-semibold text-text-primary hover:text-text-secondary transition-colors underline decoration-text-secondary/30 underline-offset-4" data-i18n-id="{{$d.Value.ID}}" data-i18n-en="{{$d.Value.EN}}">{{$d.Value.ID}}</a>
               {{else}}
-              <span class="text-base font-semibold text-text-primary">{{$d.Value}}</span>
+              <span class="text-base font-semibold text-text-primary" data-i18n-id="{{$d.Value.ID}}" data-i18n-en="{{$d.Value.EN}}">{{$d.Value.ID}}</span>
               {{end}}
             </div>
           </div>
@@ -113,22 +113,22 @@
     <div class="mt-24 md:mt-32 pb-6 border-text-secondary/10">
       <div class="scroll-velocity relative overflow-hidden" data-velocity="50">
         <div class="scroll-velocity-track flex whitespace-nowrap text-center font-sans text-4xl font-bold tracking-[-0.02em] drop-shadow md:text-[5rem] md:leading-20">
-          <span data-measure class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Halo, Aku {{.Profile.ShortName}}&nbsp;</span>
-          <span class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Halo, Aku {{.Profile.ShortName}}&nbsp;</span>
-          <span class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Halo, Aku {{.Profile.ShortName}}&nbsp;</span>
-          <span class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Halo, Aku {{.Profile.ShortName}}&nbsp;</span>
-          <span class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Halo, Aku {{.Profile.ShortName}}&nbsp;</span>
-          <span class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Halo, Aku {{.Profile.ShortName}}&nbsp;</span>
+          <span data-measure data-marquee-id="Halo, Aku {{.Profile.ShortName}}&nbsp;" data-marquee-en="Hello, I'm {{.Profile.ShortName}}&nbsp;" class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Halo, Aku {{.Profile.ShortName}}&nbsp;</span>
+          <span data-marquee-id="Halo, Aku {{.Profile.ShortName}}&nbsp;" data-marquee-en="Hello, I'm {{.Profile.ShortName}}&nbsp;" class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Halo, Aku {{.Profile.ShortName}}&nbsp;</span>
+          <span data-marquee-id="Halo, Aku {{.Profile.ShortName}}&nbsp;" data-marquee-en="Hello, I'm {{.Profile.ShortName}}&nbsp;" class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Halo, Aku {{.Profile.ShortName}}&nbsp;</span>
+          <span data-marquee-id="Halo, Aku {{.Profile.ShortName}}&nbsp;" data-marquee-en="Hello, I'm {{.Profile.ShortName}}&nbsp;" class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Halo, Aku {{.Profile.ShortName}}&nbsp;</span>
+          <span data-marquee-id="Halo, Aku {{.Profile.ShortName}}&nbsp;" data-marquee-en="Hello, I'm {{.Profile.ShortName}}&nbsp;" class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Halo, Aku {{.Profile.ShortName}}&nbsp;</span>
+          <span data-marquee-id="Halo, Aku {{.Profile.ShortName}}&nbsp;" data-marquee-en="Hello, I'm {{.Profile.ShortName}}&nbsp;" class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Halo, Aku {{.Profile.ShortName}}&nbsp;</span>
         </div>
       </div>
       <div class="scroll-velocity relative overflow-hidden" data-velocity="-50">
         <div class="scroll-velocity-track flex whitespace-nowrap text-center font-sans text-4xl font-bold tracking-[-0.02em] drop-shadow md:text-[5rem] md:leading-20">
-          <span data-measure class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Web Developer&nbsp;</span>
-          <span class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Web Developer&nbsp;</span>
-          <span class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Web Developer&nbsp;</span>
-          <span class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Web Developer&nbsp;</span>
-          <span class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Web Developer&nbsp;</span>
-          <span class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Web Developer&nbsp;</span>
+          <span data-measure data-marquee-id="Web Developer&nbsp;" data-marquee-en="Web Developer&nbsp;" class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Web Developer&nbsp;</span>
+          <span data-marquee-id="Web Developer&nbsp;" data-marquee-en="Web Developer&nbsp;" class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Web Developer&nbsp;</span>
+          <span data-marquee-id="Web Developer&nbsp;" data-marquee-en="Web Developer&nbsp;" class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Web Developer&nbsp;</span>
+          <span data-marquee-id="Web Developer&nbsp;" data-marquee-en="Web Developer&nbsp;" class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Web Developer&nbsp;</span>
+          <span data-marquee-id="Web Developer&nbsp;" data-marquee-en="Web Developer&nbsp;" class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Web Developer&nbsp;</span>
+          <span data-marquee-id="Web Developer&nbsp;" data-marquee-en="Web Developer&nbsp;" class="shrink font-black tracking-tighter text-thirdary dark:text-button-hover opacity-50">Web Developer&nbsp;</span>
         </div>
       </div>
     </div>
@@ -140,8 +140,8 @@
 <section id="graduation" class="w-full max-w-7xl mx-auto py-24 md:py-32 cursor-default bg-background relative border-t border-text-secondary/10">
   <div class="reveal" data-reveal="down">
     <div class="max-w-7xl mx-auto px-6 md:px-12 mb-16 md:mb-24 w-full text-left">
-      <h2 class="text-sm font-bold tracking-[0.2em] text-text-secondary uppercase mb-4">Momen</h2>
-      <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter">Dokumentasi Wisuda</h3>
+      <h2 class="text-sm font-bold tracking-[0.2em] text-text-secondary uppercase mb-4" data-i18n="grad_eyebrow">Momen</h2>
+      <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter" data-i18n="grad_title">Dokumentasi Wisuda</h3>
     </div>
   </div>
 
@@ -149,10 +149,10 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {{range $i, $p := .GraduationPhoto}}
       <div class="reveal {{if ge $i 3}}hidden{{end}}" data-reveal="up" data-graduation-item="{{$i}}" style="transition-delay: {{mul $i 80}}ms">
-        <button type="button" data-lightbox-open="{{$i}}" class="group relative block w-full aspect-[3/4] rounded-2xl overflow-hidden border border-text-secondary/20 hover:border-text-primary/50 transition-all duration-500 shadow-sm hover:shadow-2xl cursor-pointer" aria-label="Perbesar {{$p.Alt}}">
-          <img src="{{$p.Src}}" alt="{{$p.Alt}}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <button type="button" data-lightbox-open="{{$i}}" class="group relative block w-full aspect-[3/4] rounded-2xl overflow-hidden border border-text-secondary/20 hover:border-text-primary/50 transition-all duration-500 shadow-sm hover:shadow-2xl cursor-pointer" aria-label="Perbesar {{$p.Alt.ID}}" data-i18n-aria-alt-id="{{$p.Alt.ID}}" data-i18n-aria-alt-en="{{$p.Alt.EN}}">
+          <img src="{{$p.Src}}" alt="{{$p.Alt.ID}}" data-i18n-alt-id="{{$p.Alt.ID}}" data-i18n-alt-en="{{$p.Alt.EN}}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
           <span class="absolute inset-0 bg-linear-to-t from-background/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-          <span class="absolute bottom-4 left-4 text-xs font-bold uppercase tracking-widest text-text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500">Perbesar</span>
+          <span class="absolute bottom-4 left-4 text-xs font-bold uppercase tracking-widest text-text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500" data-i18n="grad_enlarge">Perbesar</span>
         </button>
       </div>
       {{end}}
@@ -161,7 +161,7 @@
     {{if gt (len .GraduationPhoto) 3}}
     <div class="mt-10 flex justify-center">
       <button id="graduation-toggle" type="button" aria-expanded="false" class="inline-flex items-center gap-3 px-8 py-4 bg-background border border-text-secondary/20 text-text-primary hover:border-text-primary hover:bg-text-primary hover:text-background rounded-xl font-bold tracking-widest text-sm uppercase transition-all duration-300 ease-out group hover:-translate-y-1.5 hover:scale-[1.02] shadow-sm hover:shadow-xl">
-        <span id="graduation-toggle-label">Lihat Semua Foto</span>
+        <span id="graduation-toggle-label" data-i18n="grad_view_all">Lihat Semua Foto</span>
         <svg id="graduation-toggle-icon" class="w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m6 9 6 6 6-6" />
         </svg>
@@ -170,22 +170,22 @@
     {{end}}
   </div>
 
-  <div id="graduation-lightbox" class="fixed inset-0 z-[90] hidden items-center justify-center p-4 md:p-12" role="dialog" aria-modal="true" aria-label="Pratinjau foto wisuda">
+  <div id="graduation-lightbox" class="fixed inset-0 z-[90] hidden items-center justify-center p-4 md:p-12" role="dialog" aria-modal="true" aria-label="Pratinjau foto wisuda" data-i18n-aria="grad_dialog_label">
     <div class="absolute inset-0 bg-background/95 backdrop-blur-xl" data-lightbox-close></div>
 
-    <button type="button" data-lightbox-close class="absolute top-4 right-4 md:top-8 md:right-8 z-10 p-3 rounded-full bg-text-secondary/10 hover:bg-text-secondary/20 text-text-primary transition-colors" aria-label="Tutup pratinjau foto">
+    <button type="button" data-lightbox-close class="absolute top-4 right-4 md:top-8 md:right-8 z-10 p-3 rounded-full bg-text-secondary/10 hover:bg-text-secondary/20 text-text-primary transition-colors" aria-label="Tutup pratinjau foto" data-i18n-aria="grad_close_preview">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18 18 6M6 6l12 12" />
       </svg>
     </button>
 
     {{if gt (len .GraduationPhoto) 1}}
-    <button type="button" data-lightbox-prev class="absolute left-4 md:left-8 z-10 p-3 rounded-full bg-text-secondary/10 hover:bg-text-secondary/20 text-text-primary transition-colors" aria-label="Foto sebelumnya">
+    <button type="button" data-lightbox-prev class="absolute left-4 md:left-8 z-10 p-3 rounded-full bg-text-secondary/10 hover:bg-text-secondary/20 text-text-primary transition-colors" aria-label="Foto sebelumnya" data-i18n-aria="grad_prev_photo">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m15 18-6-6 6-6" />
       </svg>
     </button>
-    <button type="button" data-lightbox-next class="absolute right-4 md:right-8 z-10 p-3 rounded-full bg-text-secondary/10 hover:bg-text-secondary/20 text-text-primary transition-colors" aria-label="Foto berikutnya">
+    <button type="button" data-lightbox-next class="absolute right-4 md:right-8 z-10 p-3 rounded-full bg-text-secondary/10 hover:bg-text-secondary/20 text-text-primary transition-colors" aria-label="Foto berikutnya" data-i18n-aria="grad_next_photo">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m9 6 6 6-6 6" />
       </svg>
@@ -203,7 +203,7 @@
 <section id="experience" class="w-full max-w-7xl mx-auto py-24 md:py-32 cursor-default bg-background relative border-t border-text-secondary/10">
   <div class="reveal" data-reveal="down">
     <div class="max-w-7xl mx-auto px-6 md:px-12 mb-16 md:mb-24 w-full text-left">
-      <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter">Work Experience</h3>
+      <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter" data-i18n="exp_title">Pengalaman Kerja</h3>
     </div>
   </div>
 
@@ -216,18 +216,18 @@
     <div class="reveal" data-reveal="up" style="transition-delay: {{mul $i 100}}ms">
       <div class="group/item relative grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 p-6 md:p-8 rounded-2xl transition-all duration-500 hover:bg-text-secondary/5 hover:shadow-lg border border-transparent hover:border-text-secondary/10">
         <div class="md:col-span-1 pt-1 md:pt-2">
-          {{if $e.Date}}
-          <span class="text-xs font-bold tracking-widest text-text-secondary uppercase">{{$e.Date}}</span>
+          {{if $e.Date.ID}}
+          <span class="text-xs font-bold tracking-widest text-text-secondary uppercase" data-i18n-id="{{$e.Date.ID}}" data-i18n-en="{{$e.Date.EN}}">{{$e.Date.ID}}</span>
           {{else}}
-          <span class="text-xs font-bold tracking-widest text-text-secondary/60 uppercase">{{if eq $e.Role "Web Developer Intern"}}Magang aktif{{else}}Aktif{{end}}</span>
+          <span class="text-xs font-bold tracking-widest text-text-secondary/60 uppercase" data-i18n="{{if eq $e.Role.ID "Web Developer Intern"}}exp_active_intern{{else}}exp_active{{end}}">{{if eq $e.Role.ID "Web Developer Intern"}}Magang aktif{{else}}Aktif{{end}}</span>
           {{end}}
         </div>
 
         <div class="md:col-span-3 flex flex-col">
-          <h4 class="text-2xl font-bold text-text-primary tracking-tight mb-1 group-hover/item:text-text-primary transition-colors">{{$e.Role}}</h4>
+          <h4 class="text-2xl font-bold text-text-primary tracking-tight mb-1 group-hover/item:text-text-primary transition-colors" data-i18n-id="{{$e.Role.ID}}" data-i18n-en="{{$e.Role.EN}}">{{$e.Role.ID}}</h4>
           <h5 class="text-sm font-bold text-text-secondary tracking-wide uppercase mb-6">{{$e.Company}}</h5>
 
-          <p class="text-base text-text-secondary font-medium leading-relaxed mb-6">{{$e.Description}}</p>
+          <p class="text-base text-text-secondary font-medium leading-relaxed mb-6" data-i18n-id="{{$e.Description.ID}}" data-i18n-en="{{$e.Description.EN}}">{{$e.Description.ID}}</p>
 
           <div class="flex flex-wrap gap-2">
             {{range $e.Skills}}
@@ -246,8 +246,8 @@
 <section id="techstack" class="w-full max-w-7xl mx-auto py-24 md:py-32 cursor-default bg-background relative border-t border-text-secondary/10 overflow-hidden">
   <div class="reveal" data-reveal="down">
     <div class="max-w-7xl mx-auto px-6 md:px-12 mb-16 md:mb-24 w-full text-left">
-      <h2 class="text-sm font-bold tracking-[0.2em] text-text-secondary uppercase mb-4">Skills &amp; Tools</h2>
-      <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter">Tech Stack</h3>
+      <h2 class="text-sm font-bold tracking-[0.2em] text-text-secondary uppercase mb-4" data-i18n="tech_eyebrow">Keahlian &amp; Alat</h2>
+      <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter" data-i18n="tech_title">Teknologi</h3>
     </div>
   </div>
 
@@ -256,8 +256,8 @@
     <div class="flex flex-col md:flex-row gap-8 md:gap-16 items-start">
       <div class="md:w-1/3">
         <div class="reveal" data-reveal="down" style="transition-delay: {{mul $idx 100}}ms">
-          <h4 class="text-2xl font-black text-text-primary tracking-tight mb-2">{{$cat.Title}}</h4>
-          <p class="text-text-secondary font-medium text-sm">{{$cat.Description}}</p>
+          <h4 class="text-2xl font-black text-text-primary tracking-tight mb-2" data-i18n-id="{{$cat.Title.ID}}" data-i18n-en="{{$cat.Title.EN}}">{{$cat.Title.ID}}</h4>
+          <p class="text-text-secondary font-medium text-sm" data-i18n-id="{{$cat.Description.ID}}" data-i18n-en="{{$cat.Description.EN}}">{{$cat.Description.ID}}</p>
         </div>
       </div>
       <div class="md:w-2/3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 w-full">
@@ -289,7 +289,7 @@
     {{if .ImagePath}}
     <img src="{{.ImagePath}}" alt="{{.Title}}" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105" />
     {{else}}
-    <div class="w-full h-full flex items-center justify-center text-text-secondary/40 text-xs font-bold uppercase tracking-widest">Foto belum ada</div>
+    <div class="w-full h-full flex items-center justify-center text-text-secondary/40 text-xs font-bold uppercase tracking-widest" data-i18n="proj_no_photo">Foto belum ada</div>
     {{end}}
 
     {{if .Tech}}
@@ -305,11 +305,11 @@
 
     <h4 class="text-2xl font-black text-text-primary tracking-tight leading-tight mb-4">{{.Title}}</h4>
 
-    <p class="text-sm text-text-secondary font-medium leading-relaxed mb-8 flex-grow line-clamp-3">{{.ShortDescription}}</p>
+    <p class="text-sm text-text-secondary font-medium leading-relaxed mb-8 flex-grow line-clamp-3" data-i18n-id="{{.ShortDescription.ID}}" data-i18n-en="{{.ShortDescription.EN}}">{{.ShortDescription.ID}}</p>
 
     <div class="flex items-center justify-between mt-auto pt-4 border-t border-text-secondary/10">
       <button data-project-open="{{.Index}}" class="text-xs font-bold tracking-[0.2em] uppercase text-text-primary flex items-center gap-3 group/btn">
-        View Details
+        <span data-i18n="proj_view_details">Lihat Detail</span>
         <span class="w-8 h-[2px] bg-text-primary group-hover/btn:w-12 transition-all duration-300"></span>
       </button>
 
@@ -338,7 +338,7 @@
   <div class="project-modal-panel bg-background border border-text-secondary/20 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl relative z-10 opacity-0 scale-95 translate-y-5 transition-all duration-300" role="dialog" aria-modal="true" aria-label="{{.Title}}">
     <div class="flex justify-between items-center p-6 border-b border-text-secondary/10">
       <h4 class="text-2xl font-black text-text-primary tracking-tight">{{.Title}}</h4>
-      <button class="text-text-secondary hover:text-text-primary transition-colors p-2 bg-text-secondary/5 rounded-full" data-project-close aria-label="Tutup detail proyek">
+      <button class="text-text-secondary hover:text-text-primary transition-colors p-2 bg-text-secondary/5 rounded-full" data-project-close aria-label="Tutup detail proyek" data-i18n-aria="proj_close_details">
         <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18 18 6M6 6l12 12" />
         </svg>
@@ -349,12 +349,12 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10 pb-8 border-b border-text-secondary/10">
         {{if .CreatedAt}}
         <div>
-          <span class="text-xs font-bold tracking-widest text-text-secondary uppercase block mb-3">Dibuat</span>
+          <span class="text-xs font-bold tracking-widest text-text-secondary uppercase block mb-3" data-i18n="proj_modal_created">Dibuat</span>
           <span class="text-sm font-bold bg-thirdary text-text-primary px-3 py-1.5 rounded-lg border border-text-secondary/10">{{.CreatedAt}}</span>
         </div>
         {{end}}
         <div>
-          <span class="text-xs font-bold tracking-widest text-text-secondary uppercase block mb-3">Teknologi</span>
+          <span class="text-xs font-bold tracking-widest text-text-secondary uppercase block mb-3" data-i18n="proj_modal_tech">Teknologi</span>
           <div class="flex flex-wrap gap-2">
             {{range .Tech}}
             <span class="text-xs font-bold bg-thirdary text-text-primary px-3 py-1.5 rounded-lg border border-text-secondary/10 uppercase tracking-wider">{{.}}</span>
@@ -365,12 +365,12 @@
 
       {{if .Features}}
       <div>
-        <span class="text-xs font-bold tracking-widest text-text-secondary uppercase block mb-5">Fitur Utama</span>
+        <span class="text-xs font-bold tracking-widest text-text-secondary uppercase block mb-5" data-i18n="proj_modal_features">Fitur Utama</span>
         <ul class="space-y-4">
           {{range .Features}}
           <li class="flex items-center bg-thirdary/50 p-4 rounded-xl border border-text-secondary/5">
             <span class="text-text-primary mr-3 font-black">&rarr;</span>
-            <span class="text-sm font-bold text-text-primary uppercase tracking-wide">{{.}}</span>
+            <span class="text-sm font-bold text-text-primary uppercase tracking-wide" data-i18n-id="{{.ID}}" data-i18n-en="{{.EN}}">{{.ID}}</span>
           </li>
           {{end}}
         </ul>
@@ -379,7 +379,7 @@
 
       {{if .Gallery}}
       <div class="mb-8">
-        <span class="text-xs font-bold tracking-widest text-text-secondary uppercase block mb-3">Tampilan</span>
+        <span class="text-xs font-bold tracking-widest text-text-secondary uppercase block mb-3" data-i18n="proj_modal_preview">Tampilan</span>
         <div class="relative aspect-[16/10] rounded-2xl overflow-hidden border border-text-secondary/15 bg-thirdary/20">
           <img data-gallery-main src="{{index .Gallery 0}}" alt="{{.Title}} tampilan 1" class="absolute inset-0 w-full h-full {{if eq .GalleryFit "contain"}}object-contain{{else}}object-cover{{end}}" />
         </div>
@@ -395,16 +395,16 @@
       </div>
       {{end}}
 
-      <p class="text-sm text-text-secondary font-medium leading-relaxed mt-6">{{.ShortDescription}}</p>
+      <p class="text-sm text-text-secondary font-medium leading-relaxed mt-6" data-i18n-id="{{.ShortDescription.ID}}" data-i18n-en="{{.ShortDescription.EN}}">{{.ShortDescription.ID}}</p>
     </div>
 
     <div class="p-6 border-t border-text-secondary/10 flex flex-col sm:flex-row gap-4 bg-background">
       {{if .LiveDemoURL}}
       <a href="{{.LiveDemoURL}}" target="_blank" rel="noopener noreferrer" class="flex-1 text-center font-bold text-sm tracking-widest uppercase bg-text-primary text-background py-4 rounded-xl hover:-translate-y-1 transition-transform duration-300">
-        Live Demo
+        <span data-i18n="proj_live_demo">Live Demo</span>
       </a>
       {{else}}
-      <span class="flex-1 text-center font-bold text-sm tracking-widest uppercase border-2 border-text-secondary/20 text-text-secondary/50 py-4 rounded-xl cursor-not-allowed select-none">Live Demo Belum Ada</span>
+      <span class="flex-1 text-center font-bold text-sm tracking-widest uppercase border-2 border-text-secondary/20 text-text-secondary/50 py-4 rounded-xl cursor-not-allowed select-none" data-i18n="proj_demo_unavailable">Live Demo Belum Ada</span>
       {{end}}
 
       {{if .IsPrivateRepo}}
@@ -412,14 +412,14 @@
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
         </svg>
-        Source Code
+        <span data-i18n="proj_source_code">Kode Sumber</span>
       </button>
       {{else if .GithubURL}}
       <a href="{{.GithubURL}}" target="_blank" rel="noopener noreferrer" class="flex-1 flex justify-center items-center gap-2 text-center font-bold text-sm tracking-widest uppercase border-2 border-text-secondary/20 text-text-primary hover:border-text-primary hover:-translate-y-1 transition-all duration-300 py-4 rounded-xl">
-        Source Code
+        <span data-i18n="proj_source_code">Kode Sumber</span>
       </a>
       {{else}}
-      <span class="flex-1 text-center font-bold text-sm tracking-widest uppercase border-2 border-text-secondary/20 text-text-secondary/50 py-4 rounded-xl cursor-not-allowed select-none">Source Code</span>
+      <span class="flex-1 text-center font-bold text-sm tracking-widest uppercase border-2 border-text-secondary/20 text-text-secondary/50 py-4 rounded-xl cursor-not-allowed select-none" data-i18n="proj_source_code">Kode Sumber</span>
       {{end}}
     </div>
   </div>
@@ -430,8 +430,8 @@
 <section id="projects" class="w-full max-w-7xl mx-auto py-24 md:py-32 cursor-default bg-background relative border-t border-text-secondary/10">
   <div class="reveal" data-reveal="down">
     <div class="max-w-7xl mx-auto px-6 md:px-12 mb-16 md:mb-24 w-full text-left">
-      <h2 class="text-sm font-bold tracking-[0.2em] text-text-secondary uppercase mb-4">Portfolio</h2>
-      <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter">Selected Works</h3>
+      <h2 class="text-sm font-bold tracking-[0.2em] text-text-secondary uppercase mb-4" data-i18n="proj_eyebrow">Portofolio</h2>
+      <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter" data-i18n="proj_title">Karya Pilihan</h3>
     </div>
   </div>
 
@@ -444,11 +444,11 @@
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M4 6a2 2 0 0 1 2-2h3l2 2h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6Z" />
           </svg>
         </div>
-        <h4 class="text-xl font-black text-text-primary tracking-tight mb-2">Karya sedang disiapkan</h4>
+        <h4 class="text-xl font-black text-text-primary tracking-tight mb-2" data-i18n="proj_empty_title">Karya sedang disiapkan</h4>
         <p class="text-sm text-text-secondary font-medium max-w-md">
-          Foto dan detail proyek akan ditambahkan. Data proyek tersimpan di
+          <span data-i18n="proj_empty_desc_pre">Foto dan detail proyek akan ditambahkan. Data proyek tersimpan di</span>
           <code class="mx-1 px-1.5 py-0.5 rounded bg-text-secondary/10 text-text-primary font-mono text-xs">internal/site/data.go</code>
-          dan tinggal diisi.
+          <span data-i18n="proj_empty_desc_post">dan tinggal diisi.</span>
         </p>
       </div>
     </div>
@@ -488,8 +488,8 @@
 <section id="certificates" class="w-full max-w-7xl mx-auto py-24 md:py-32 cursor-default bg-background relative border-t border-text-secondary/10">
   <div class="reveal" data-reveal="down">
     <div class="max-w-7xl mx-auto px-6 md:px-12 mb-16 md:mb-24 w-full text-left">
-      <h2 class="text-sm font-bold tracking-[0.2em] text-text-secondary uppercase mb-4">Sertifikasi</h2>
-      <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter">Certificates</h3>
+      <h2 class="text-sm font-bold tracking-[0.2em] text-text-secondary uppercase mb-4" data-i18n="cert_eyebrow">Sertifikasi</h2>
+      <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter" data-i18n="cert_title">Sertifikat</h3>
     </div>
   </div>
 
@@ -499,10 +499,10 @@
       <button type="button" data-certificate-open="{{$i}}" class="group w-full flex items-center justify-between gap-4 p-6 md:p-8 bg-background border border-text-secondary/20 hover:border-text-primary/50 rounded-2xl transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 text-left">
         <div class="flex flex-col gap-1">
           <span class="text-xs font-bold tracking-widest text-text-secondary uppercase">{{$c.Issuer}}</span>
-          <span class="text-lg md:text-xl font-bold text-text-primary tracking-tight">{{$c.Title}}</span>
+          <span class="text-lg md:text-xl font-bold text-text-primary tracking-tight" data-i18n-id="{{$c.Title.ID}}" data-i18n-en="{{$c.Title.EN}}">{{$c.Title.ID}}</span>
         </div>
         <span class="text-xs font-bold tracking-[0.2em] uppercase text-text-primary flex items-center gap-3 shrink-0">
-          Lihat
+          <span data-i18n="cert_view">Lihat</span>
           <span class="w-8 h-[2px] bg-text-primary group-hover:w-12 transition-all duration-300"></span>
         </span>
       </button>
@@ -511,12 +511,12 @@
   </div>
 
   {{range $i, $c := .Certificates}}
-  <div class="certificate-modal fixed inset-0 z-[95] hidden items-center justify-center p-4 md:p-12" data-certificate-modal="{{$i}}" role="dialog" aria-modal="true" aria-label="{{$c.Title}}">
+  <div class="certificate-modal fixed inset-0 z-[95] hidden items-center justify-center p-4 md:p-12" data-certificate-modal="{{$i}}" role="dialog" aria-modal="true" aria-label="{{$c.Title.ID}}">
     <div class="absolute inset-0 bg-background/95 backdrop-blur-xl" data-certificate-close></div>
     <div class="relative z-10 w-full max-w-4xl h-[85vh] flex flex-col">
       <div class="flex items-center justify-between mb-4">
-        <span class="text-sm font-bold text-text-primary tracking-tight">{{$c.Title}}</span>
-        <button data-certificate-close class="p-3 rounded-full bg-text-secondary/10 hover:bg-text-secondary/20 text-text-primary transition-colors" aria-label="Tutup sertifikat">
+        <span class="text-sm font-bold text-text-primary tracking-tight" data-i18n-id="{{$c.Title.ID}}" data-i18n-en="{{$c.Title.EN}}">{{$c.Title.ID}}</span>
+        <button data-certificate-close class="p-3 rounded-full bg-text-secondary/10 hover:bg-text-secondary/20 text-text-primary transition-colors" aria-label="Tutup sertifikat" data-i18n-aria="cert_close">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18 18 6M6 6l12 12" />
           </svg>
@@ -524,9 +524,9 @@
       </div>
       <div class="flex-1 bg-thirdary/20 rounded-2xl overflow-hidden border border-text-secondary/20">
         {{if eq $c.Type "image"}}
-        <img src="{{$c.Src}}" alt="{{$c.Title}}" class="w-full h-full object-contain" />
+        <img src="{{$c.Src}}" alt="{{$c.Title.ID}}" data-i18n-alt-id="{{$c.Title.ID}}" data-i18n-alt-en="{{$c.Title.EN}}" class="w-full h-full object-contain" />
         {{else}}
-        <iframe src="{{$c.Src}}" title="{{$c.Title}}" class="w-full h-full"></iframe>
+        <iframe src="{{$c.Src}}" title="{{$c.Title.ID}}" class="w-full h-full"></iframe>
         {{end}}
       </div>
     </div>
